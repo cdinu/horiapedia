@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 from file_system_manager import create_directory_structure
 from markdown_writer import write_markdown
@@ -27,7 +28,20 @@ def process_pptx_files(input_folder, output_folder):
 
 
 if __name__ == "__main__":
-    input_folder = "../input_pptx_files"
-    output_folder = "../output_markdown_files"
+    input_folder = None
+    output_folder = None
+
+    if len(sys.argv) > 1:
+        input_folder = sys.argv[1]
+    else:
+        input_folder = "../input_pptx_files"
+
+    if len(sys.argv) > 2:
+        output_folder = sys.argv[2]
+    else:
+        output_folder = "../output_markdown_files"
+
+    logging.debug(f"Input folder: {input_folder}")
+    logging.debug(f"Output folder: {output_folder}")
 
     process_pptx_files(input_folder, output_folder)
